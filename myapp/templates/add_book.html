@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; }
+        form { max-width: 400px; margin: auto; background: #f2f2f2; padding: 20px; border-radius: 5px; }
+        div { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { background: #5cb85c; color: white; border: none; padding: 10px 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="{% url 'library_home' %}">Home</a> | <a href="{% url 'book_list' %}">Book List</a>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Add New Book</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: green;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <div>
+            <label>Title:</label>
+            <input type="text" name="title" required>
+        </div>
+        <div>
+            <label>Author:</label>
+            <input type="text" name="author" required>
+        </div>
+        <div>
+            <label>Description:</label>
+            <textarea name="description" rows="4"></textarea>
+        </div>
+        <button type="submit">Add Book</button>
+    </form>
+</body>
+</html>

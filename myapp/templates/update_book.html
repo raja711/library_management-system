@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Book</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; }
+        form { max-width: 400px; margin: auto; background: #f2f2f2; padding: 20px; border-radius: 5px; }
+        div { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { background: #5cb85c; color: white; border: none; padding: 10px 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="{% url 'library_home' %}">Home</a> | <a href="{% url 'book_list' %}">Book List</a>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Update Book Details</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: {% if 'does not exist' in message.tags %}red{% else %}green{% endif %};">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <div>
+            <label>Book ID to Update:</label>
+            <input type="number" name="book_id" required>
+        </div>
+        <div>
+            <label>New Title:</label>
+            <input type="text" name="title">
+        </div>
+        <div>
+            <label>New Author:</label>
+            <input type="text" name="author">
+        </div>
+        <div>
+            <label>New Description:</label>
+            <textarea name="description" rows="3"></textarea>
+        </div>
+        <button type="submit">Update Book</button>
+    </form>
+</body>
+</html>
